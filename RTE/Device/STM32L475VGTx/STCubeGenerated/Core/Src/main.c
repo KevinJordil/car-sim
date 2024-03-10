@@ -21,7 +21,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "cmsis_os2.h"
+#include "RTE_Components.h"
+#include "cmsis_vio.h"
 
+#include "../Application/faults.h"
+#include "../Application/timeline.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,6 +36,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define CANNOT_CREATE_THREAD 0x01U
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -51,7 +57,7 @@ UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
-
+osThreadId_t tid_thr_app_main;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,7 +75,42 @@ static void MX_USART3_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+/*---------------------------------------------------------------------------
+  thrLED: Thread function for blinking the LED
+ *---------------------------------------------------------------------------*/
+__NO_RETURN static void thrLED (void *arg) {
+  uint32_t active_flag = 0U;
 
+  (void)arg;
+
+  for (;;) {
+        // Switch LED0 on
+    vioSetSignal(vioLED0, vioLEDon);
+        // Delay 500 ms
+    osDelay(500U);
+        // Switch LED0 off      
+    vioSetSignal(vioLED0, vioLEDoff);
+        // Delay 500 ms
+    osDelay(500U);                            
+  }
+}
+
+/*---------------------------------------------------------------------------
+ * Application initialization
+ *---------------------------------------------------------------------------*/
+void app_initialize (void) {
+  osThreadId_t tid_thrLED = osThreadNew(thrLED, NULL, NULL);
+    if (tid_thrLED == NULL) { 
+      Error_Handler();
+    }
+}
+
+void app_main_timeline_scheduling(void) {
+    tid_thr_app_main = osThreadNew(timeline_task_thread, NULL, NULL);
+    if (tid_thr_app_main == NULL) {
+        app_error_handler(CANNOT_CREATE_THREAD);
+    }
+}
 /* USER CODE END 0 */
 
 /**
@@ -107,7 +148,18 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-                       
+	// Initializes VIO
+  vioInit(); 
+	// Initialize CMSIS-RTOS2
+  osKernelInitialize();
+  // Initialize application
+  //app_initialize();
+
+	
+	app_main_timeline_scheduling();
+	
+	 // Start thread execution
+  osKernelStart();
   /* USER CODE END 2 */
 
   /* Infinite loop */
