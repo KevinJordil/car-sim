@@ -4,4 +4,4 @@
 extern osThreadId_t tid_thr_app_main;
 
 void timeline_task_thread();
-#endif // TIMELINE_H
+#endif  // TIMELINE_H

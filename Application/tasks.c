@@ -16,26 +16,24 @@
 /* Although normally "The Standard Library input/output functions shall not be
    used" (Rule 21.6), in this case we make use of it as temporary solution. */
 // cppcheck-suppress misra-c2012-21.6
-#include <stdio.h>
-#include <stdint.h>
-
 #include "tasks.h"
+
+#include <stdint.h>
+#include <stdio.h>
+
 #include "helpers.h"
 
-void task1(void *arg)
-{
-    uint32_t computation_time = (uint32_t) * ((uint32_t *)arg);
+void task1(void* arg) {
+    uint32_t computation_time = (uint32_t) * ((uint32_t*)arg);
     busy_wait_ms(computation_time);
 }
 
-void task2(void *arg)
-{
-    uint32_t computation_time = (uint32_t) * ((uint32_t *)arg);
+void task2(void* arg) {
+    uint32_t computation_time = (uint32_t) * ((uint32_t*)arg);
     busy_wait_ms(computation_time);
 }
 
-void task3(void *arg)
-{
-    uint32_t computation_time = (uint32_t) * ((uint32_t *)arg);
+void task3(void* arg) {
+    uint32_t computation_time = (uint32_t) * ((uint32_t*)arg);
     busy_wait_ms(computation_time);
 }

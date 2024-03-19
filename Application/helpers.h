@@ -3,4 +3,4 @@
 
 void busy_wait_ms(uint32_t ms);
 
-#endif // HELPER_H
+#endif  // HELPER_H
