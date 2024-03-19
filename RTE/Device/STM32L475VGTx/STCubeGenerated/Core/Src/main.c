@@ -121,9 +121,11 @@ int main(void) {
 
     /* USER CODE END 1 */
 
-    /* MCU Configuration--------------------------------------------------------*/
+    /* MCU
+     * Configuration--------------------------------------------------------*/
 
-    /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+    /* Reset of all peripherals, Initializes the Flash interface and the
+     * Systick. */
     HAL_Init();
 
     /* USER CODE BEGIN Init */
@@ -179,7 +181,8 @@ void SystemClock_Config(void) {
 
     /** Configure the main internal regulator output voltage
      */
-    if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK) {
+    if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) !=
+        HAL_OK) {
         Error_Handler();
     }
 
@@ -191,7 +194,8 @@ void SystemClock_Config(void) {
     /** Initializes the RCC Oscillators according to the specified parameters
      * in the RCC_OscInitTypeDef structure.
      */
-    RCC_OscInitStruct.OscillatorType      = RCC_OSCILLATORTYPE_LSE | RCC_OSCILLATORTYPE_MSI;
+    RCC_OscInitStruct.OscillatorType =
+        RCC_OSCILLATORTYPE_LSE | RCC_OSCILLATORTYPE_MSI;
     RCC_OscInitStruct.LSEState            = RCC_LSE_ON;
     RCC_OscInitStruct.MSIState            = RCC_MSI_ON;
     RCC_OscInitStruct.MSICalibrationValue = 0;
@@ -209,8 +213,8 @@ void SystemClock_Config(void) {
 
     /** Initializes the CPU, AHB and APB buses clocks
      */
-    RCC_ClkInitStruct.ClockType =
-        RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK |
+                                  RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
     RCC_ClkInitStruct.SYSCLKSource   = RCC_SYSCLKSOURCE_PLLCLK;
     RCC_ClkInitStruct.AHBCLKDivider  = RCC_SYSCLK_DIV1;
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
@@ -238,19 +242,21 @@ static void MX_DFSDM1_Init(void) {
     /* USER CODE BEGIN DFSDM1_Init 1 */
 
     /* USER CODE END DFSDM1_Init 1 */
-    hdfsdm1_channel1.Instance                      = DFSDM1_Channel1;
-    hdfsdm1_channel1.Init.OutputClock.Activation   = ENABLE;
-    hdfsdm1_channel1.Init.OutputClock.Selection    = DFSDM_CHANNEL_OUTPUT_CLOCK_SYSTEM;
-    hdfsdm1_channel1.Init.OutputClock.Divider      = 2;
-    hdfsdm1_channel1.Init.Input.Multiplexer        = DFSDM_CHANNEL_EXTERNAL_INPUTS;
-    hdfsdm1_channel1.Init.Input.DataPacking        = DFSDM_CHANNEL_STANDARD_MODE;
-    hdfsdm1_channel1.Init.Input.Pins               = DFSDM_CHANNEL_FOLLOWING_CHANNEL_PINS;
-    hdfsdm1_channel1.Init.SerialInterface.Type     = DFSDM_CHANNEL_SPI_RISING;
-    hdfsdm1_channel1.Init.SerialInterface.SpiClock = DFSDM_CHANNEL_SPI_CLOCK_INTERNAL;
-    hdfsdm1_channel1.Init.Awd.FilterOrder          = DFSDM_CHANNEL_FASTSINC_ORDER;
-    hdfsdm1_channel1.Init.Awd.Oversampling         = 1;
-    hdfsdm1_channel1.Init.Offset                   = 0;
-    hdfsdm1_channel1.Init.RightBitShift            = 0x00;
+    hdfsdm1_channel1.Instance                    = DFSDM1_Channel1;
+    hdfsdm1_channel1.Init.OutputClock.Activation = ENABLE;
+    hdfsdm1_channel1.Init.OutputClock.Selection =
+        DFSDM_CHANNEL_OUTPUT_CLOCK_SYSTEM;
+    hdfsdm1_channel1.Init.OutputClock.Divider = 2;
+    hdfsdm1_channel1.Init.Input.Multiplexer   = DFSDM_CHANNEL_EXTERNAL_INPUTS;
+    hdfsdm1_channel1.Init.Input.DataPacking   = DFSDM_CHANNEL_STANDARD_MODE;
+    hdfsdm1_channel1.Init.Input.Pins = DFSDM_CHANNEL_FOLLOWING_CHANNEL_PINS;
+    hdfsdm1_channel1.Init.SerialInterface.Type = DFSDM_CHANNEL_SPI_RISING;
+    hdfsdm1_channel1.Init.SerialInterface.SpiClock =
+        DFSDM_CHANNEL_SPI_CLOCK_INTERNAL;
+    hdfsdm1_channel1.Init.Awd.FilterOrder  = DFSDM_CHANNEL_FASTSINC_ORDER;
+    hdfsdm1_channel1.Init.Awd.Oversampling = 1;
+    hdfsdm1_channel1.Init.Offset           = 0;
+    hdfsdm1_channel1.Init.RightBitShift    = 0x00;
     if (HAL_DFSDM_ChannelInit(&hdfsdm1_channel1) != HAL_OK) {
         Error_Handler();
     }
@@ -287,7 +293,8 @@ static void MX_I2C2_Init(void) {
 
     /** Configure Analogue filter
      */
-    if (HAL_I2CEx_ConfigAnalogFilter(&hi2c2, I2C_ANALOGFILTER_ENABLE) != HAL_OK) {
+    if (HAL_I2CEx_ConfigAnalogFilter(&hi2c2, I2C_ANALOGFILTER_ENABLE) !=
+        HAL_OK) {
         Error_Handler();
     }
 
@@ -445,46 +452,57 @@ static void MX_GPIO_Init(void) {
 
     /*Configure GPIO pin Output Level */
     HAL_GPIO_WritePin(
-        GPIOE, M24SR64_Y_RF_DISABLE_Pin | M24SR64_Y_GPO_Pin | ISM43362_RST_Pin, GPIO_PIN_RESET);
+        GPIOE,
+        M24SR64_Y_RF_DISABLE_Pin | M24SR64_Y_GPO_Pin | ISM43362_RST_Pin,
+        GPIO_PIN_RESET);
 
     /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(GPIOA, ARD_D10_Pin | SPBTLE_RF_RST_Pin | ARD_D9_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(
+        GPIOA, ARD_D10_Pin | SPBTLE_RF_RST_Pin | ARD_D9_Pin, GPIO_PIN_RESET);
 
     /*Configure GPIO pin Output Level */
     HAL_GPIO_WritePin(GPIOB,
-                      ARD_D8_Pin | ISM43362_BOOT0_Pin | ISM43362_WAKEUP_Pin | LED2_Pin |
-                          SPSGRF_915_SDN_Pin | ARD_D5_Pin,
+                      ARD_D8_Pin | ISM43362_BOOT0_Pin | ISM43362_WAKEUP_Pin |
+                          LED2_Pin | SPSGRF_915_SDN_Pin | ARD_D5_Pin,
                       GPIO_PIN_RESET);
 
     /*Configure GPIO pin Output Level */
     HAL_GPIO_WritePin(
-        GPIOD, USB_OTG_FS_PWR_EN_Pin | PMOD_RESET_Pin | STSAFE_A100_RESET_Pin, GPIO_PIN_RESET);
+        GPIOD,
+        USB_OTG_FS_PWR_EN_Pin | PMOD_RESET_Pin | STSAFE_A100_RESET_Pin,
+        GPIO_PIN_RESET);
 
     /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(SPBTLE_RF_SPI3_CSN_GPIO_Port, SPBTLE_RF_SPI3_CSN_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(
+        SPBTLE_RF_SPI3_CSN_GPIO_Port, SPBTLE_RF_SPI3_CSN_Pin, GPIO_PIN_SET);
 
     /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(GPIOC, VL53L0X_XSHUT_Pin | LED3_WIFI__LED4_BLE_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(
+        GPIOC, VL53L0X_XSHUT_Pin | LED3_WIFI__LED4_BLE_Pin, GPIO_PIN_RESET);
 
     /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(SPSGRF_915_SPI3_CSN_GPIO_Port, SPSGRF_915_SPI3_CSN_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(
+        SPSGRF_915_SPI3_CSN_GPIO_Port, SPSGRF_915_SPI3_CSN_Pin, GPIO_PIN_SET);
 
     /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(ISM43362_SPI3_CSN_GPIO_Port, ISM43362_SPI3_CSN_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(
+        ISM43362_SPI3_CSN_GPIO_Port, ISM43362_SPI3_CSN_Pin, GPIO_PIN_SET);
 
-    /*Configure GPIO pins : M24SR64_Y_RF_DISABLE_Pin M24SR64_Y_GPO_Pin ISM43362_RST_Pin
-     * ISM43362_SPI3_CSN_Pin */
-    GPIO_InitStruct.Pin =
-        M24SR64_Y_RF_DISABLE_Pin | M24SR64_Y_GPO_Pin | ISM43362_RST_Pin | ISM43362_SPI3_CSN_Pin;
+    /*Configure GPIO pins : M24SR64_Y_RF_DISABLE_Pin M24SR64_Y_GPO_Pin
+     * ISM43362_RST_Pin ISM43362_SPI3_CSN_Pin */
+    GPIO_InitStruct.Pin = M24SR64_Y_RF_DISABLE_Pin | M24SR64_Y_GPO_Pin |
+                          ISM43362_RST_Pin | ISM43362_SPI3_CSN_Pin;
     GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull  = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-    /*Configure GPIO pins : USB_OTG_FS_OVRCR_EXTI3_Pin SPSGRF_915_GPIO3_EXTI5_Pin
-     * SPBTLE_RF_IRQ_EXTI6_Pin ISM43362_DRDY_EXTI1_Pin */
-    GPIO_InitStruct.Pin = USB_OTG_FS_OVRCR_EXTI3_Pin | SPSGRF_915_GPIO3_EXTI5_Pin |
-                          SPBTLE_RF_IRQ_EXTI6_Pin | ISM43362_DRDY_EXTI1_Pin;
+    /*Configure GPIO pins : USB_OTG_FS_OVRCR_EXTI3_Pin
+     * SPSGRF_915_GPIO3_EXTI5_Pin SPBTLE_RF_IRQ_EXTI6_Pin
+     * ISM43362_DRDY_EXTI1_Pin */
+    GPIO_InitStruct.Pin = USB_OTG_FS_OVRCR_EXTI3_Pin |
+                          SPSGRF_915_GPIO3_EXTI5_Pin | SPBTLE_RF_IRQ_EXTI6_Pin |
+                          ISM43362_DRDY_EXTI1_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
@@ -497,8 +515,8 @@ static void MX_GPIO_Init(void) {
 
     /*Configure GPIO pins : ARD_A5_Pin ARD_A4_Pin ARD_A3_Pin ARD_A2_Pin
                              ARD_A1_Pin ARD_A0_Pin */
-    GPIO_InitStruct.Pin =
-        ARD_A5_Pin | ARD_A4_Pin | ARD_A3_Pin | ARD_A2_Pin | ARD_A1_Pin | ARD_A0_Pin;
+    GPIO_InitStruct.Pin = ARD_A5_Pin | ARD_A4_Pin | ARD_A3_Pin | ARD_A2_Pin |
+                          ARD_A1_Pin | ARD_A0_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG_ADC_CONTROL;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
@@ -552,27 +570,29 @@ static void MX_GPIO_Init(void) {
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(ARD_D6_GPIO_Port, &GPIO_InitStruct);
 
-    /*Configure GPIO pins : ARD_D8_Pin ISM43362_BOOT0_Pin ISM43362_WAKEUP_Pin LED2_Pin
-                             SPSGRF_915_SDN_Pin ARD_D5_Pin SPSGRF_915_SPI3_CSN_Pin */
-    GPIO_InitStruct.Pin = ARD_D8_Pin | ISM43362_BOOT0_Pin | ISM43362_WAKEUP_Pin | LED2_Pin |
-                          SPSGRF_915_SDN_Pin | ARD_D5_Pin | SPSGRF_915_SPI3_CSN_Pin;
+    /*Configure GPIO pins : ARD_D8_Pin ISM43362_BOOT0_Pin ISM43362_WAKEUP_Pin
+       LED2_Pin SPSGRF_915_SDN_Pin ARD_D5_Pin SPSGRF_915_SPI3_CSN_Pin */
+    GPIO_InitStruct.Pin = ARD_D8_Pin | ISM43362_BOOT0_Pin |
+                          ISM43362_WAKEUP_Pin | LED2_Pin | SPSGRF_915_SDN_Pin |
+                          ARD_D5_Pin | SPSGRF_915_SPI3_CSN_Pin;
     GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull  = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-    /*Configure GPIO pins : LPS22HB_INT_DRDY_EXTI0_Pin LSM6DSL_INT1_EXTI11_Pin ARD_D2_Pin
-       HTS221_DRDY_EXTI15_Pin PMOD_IRQ_EXTI12_Pin */
-    GPIO_InitStruct.Pin = LPS22HB_INT_DRDY_EXTI0_Pin | LSM6DSL_INT1_EXTI11_Pin | ARD_D2_Pin |
-                          HTS221_DRDY_EXTI15_Pin | PMOD_IRQ_EXTI12_Pin;
+    /*Configure GPIO pins : LPS22HB_INT_DRDY_EXTI0_Pin LSM6DSL_INT1_EXTI11_Pin
+       ARD_D2_Pin HTS221_DRDY_EXTI15_Pin PMOD_IRQ_EXTI12_Pin */
+    GPIO_InitStruct.Pin = LPS22HB_INT_DRDY_EXTI0_Pin | LSM6DSL_INT1_EXTI11_Pin |
+                          ARD_D2_Pin | HTS221_DRDY_EXTI15_Pin |
+                          PMOD_IRQ_EXTI12_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-    /*Configure GPIO pins : USB_OTG_FS_PWR_EN_Pin SPBTLE_RF_SPI3_CSN_Pin PMOD_RESET_Pin
-     * STSAFE_A100_RESET_Pin */
-    GPIO_InitStruct.Pin =
-        USB_OTG_FS_PWR_EN_Pin | SPBTLE_RF_SPI3_CSN_Pin | PMOD_RESET_Pin | STSAFE_A100_RESET_Pin;
+    /*Configure GPIO pins : USB_OTG_FS_PWR_EN_Pin SPBTLE_RF_SPI3_CSN_Pin
+     * PMOD_RESET_Pin STSAFE_A100_RESET_Pin */
+    GPIO_InitStruct.Pin = USB_OTG_FS_PWR_EN_Pin | SPBTLE_RF_SPI3_CSN_Pin |
+                          PMOD_RESET_Pin | STSAFE_A100_RESET_Pin;
     GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull  = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -597,8 +617,10 @@ static void MX_GPIO_Init(void) {
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(USB_OTG_FS_VBUS_GPIO_Port, &GPIO_InitStruct);
 
-    /*Configure GPIO pins : USB_OTG_FS_ID_Pin USB_OTG_FS_DM_Pin USB_OTG_FS_DP_Pin */
-    GPIO_InitStruct.Pin       = USB_OTG_FS_ID_Pin | USB_OTG_FS_DM_Pin | USB_OTG_FS_DP_Pin;
+    /*Configure GPIO pins : USB_OTG_FS_ID_Pin USB_OTG_FS_DM_Pin
+     * USB_OTG_FS_DP_Pin */
+    GPIO_InitStruct.Pin =
+        USB_OTG_FS_ID_Pin | USB_OTG_FS_DM_Pin | USB_OTG_FS_DP_Pin;
     GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull      = GPIO_NOPULL;
     GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -613,10 +635,10 @@ static void MX_GPIO_Init(void) {
     GPIO_InitStruct.Alternate = GPIO_AF5_SPI2;
     HAL_GPIO_Init(PMOD_SPI2_SCK_GPIO_Port, &GPIO_InitStruct);
 
-    /*Configure GPIO pins : PMOD_UART2_CTS_Pin PMOD_UART2_RTS_Pin PMOD_UART2_TX_Pin
-     * PMOD_UART2_RX_Pin */
-    GPIO_InitStruct.Pin =
-        PMOD_UART2_CTS_Pin | PMOD_UART2_RTS_Pin | PMOD_UART2_TX_Pin | PMOD_UART2_RX_Pin;
+    /*Configure GPIO pins : PMOD_UART2_CTS_Pin PMOD_UART2_RTS_Pin
+     * PMOD_UART2_TX_Pin PMOD_UART2_RX_Pin */
+    GPIO_InitStruct.Pin = PMOD_UART2_CTS_Pin | PMOD_UART2_RTS_Pin |
+                          PMOD_UART2_TX_Pin | PMOD_UART2_RX_Pin;
     GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull      = GPIO_NOPULL;
     GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -649,7 +671,8 @@ static void MX_GPIO_Init(void) {
  */
 void Error_Handler(void) {
     /* USER CODE BEGIN Error_Handler_Debug */
-    /* User can add his own implementation to report the HAL error return state */
+    /* User can add his own implementation to report the HAL error return state
+     */
     __disable_irq();
     while (1) {
     }
@@ -666,8 +689,9 @@ void Error_Handler(void) {
  */
 void assert_failed(uint8_t* file, uint32_t line) {
     /* USER CODE BEGIN 6 */
-    /* User can add his own implementation to report the file name and line number,
-       ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+    /* User can add his own implementation to report the file name and line
+       number, ex: printf("Wrong parameters value: file %s on line %d\r\n",
+       file, line) */
     /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

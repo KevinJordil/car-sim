@@ -27,23 +27,26 @@
 
 // code part of the "timeline_task_thread()" function
 void timeline_task_thread() {
-    uint32_t c1                 = 150;
-    uint32_t t1                 = 250U;
-    osTimerId_t periodic_task_1 = osTimerNew(task1, osTimerPeriodic, (void*)&c1, NULL);
+    uint32_t c1 = 150;
+    uint32_t t1 = 250U;
+    osTimerId_t periodic_task_1 =
+        osTimerNew(task1, osTimerPeriodic, (void*)&c1, NULL);
     if (periodic_task_1 == NULL) {
         app_error_handler(CANNOT_CREATE_TIMER);
     }
 
-    uint32_t c2                 = 100;
-    uint32_t t2                 = 500U;
-    osTimerId_t periodic_task_2 = osTimerNew(task2, osTimerPeriodic, (void*)&c2, NULL);
+    uint32_t c2 = 100;
+    uint32_t t2 = 500U;
+    osTimerId_t periodic_task_2 =
+        osTimerNew(task2, osTimerPeriodic, (void*)&c2, NULL);
     if (periodic_task_2 == NULL) {
         app_error_handler(CANNOT_CREATE_TIMER);
     }
 
-    uint32_t c3                 = 50;
-    uint32_t t3                 = 1000U;
-    osTimerId_t periodic_task_3 = osTimerNew(task3, osTimerPeriodic, (void*)&c3, NULL);
+    uint32_t c3 = 50;
+    uint32_t t3 = 1000U;
+    osTimerId_t periodic_task_3 =
+        osTimerNew(task3, osTimerPeriodic, (void*)&c3, NULL);
     if (periodic_task_3 == NULL) {
         app_error_handler(CANNOT_CREATE_TIMER);
     }
