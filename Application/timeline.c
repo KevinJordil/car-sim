@@ -60,5 +60,5 @@ void timeline_task_thread()
     osTimerStart(periodic_task_3, t3);
 
     // Suspend tid_thr_app_main
-    // osThreadSuspend(tid_thr_app_main);
+    osThreadSuspend(tid_thr_app_main);
 }
