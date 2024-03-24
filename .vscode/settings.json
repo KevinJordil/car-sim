@@ -3,6 +3,7 @@
         "cstdint": "c",
         "stdio.h": "c",
         "stdint.h": "c",
-        "tasks.h": "c"
+        "tasks.h": "c",
+        "faults.h": "c"
     }
 }

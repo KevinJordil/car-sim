@@ -1,6 +1,6 @@
 /**
  ******************************************************************************
- * @file        : faults.c
+ * @file        : faults.h
  * @brief       : error helper module
  * @author      : Kevin Jordil
  * @date        : 19. March 2023

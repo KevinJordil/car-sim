@@ -16,14 +16,14 @@
 /* Although normally "The Standard Library input/output functions shall not be
    used" (Rule 21.6), in this case we make use of it as temporary solution. */
 // cppcheck-suppress misra-c2012-21.6
-#include "timeline.h"
+#include "Application/timeline.h"
 
 #include <stdint.h>
 #include <stdio.h>
 
+#include "Application/faults.h"
+#include "Application/tasks.h"
 #include "cmsis_os2.h"
-#include "faults.h"
-#include "tasks.h"
 
 // code part of the "timeline_task_thread()" function
 void timeline_task_thread() {

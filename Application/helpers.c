@@ -16,7 +16,7 @@
 /* Although normally "The Standard Library input/output functions shall not be
    used" (Rule 21.6), in this case we make use of it as temporary solution. */
 // cppcheck-suppress misra-c2012-21.6
-#include "helpers.h"
+#include "Application/helpers.h"
 
 #include <stdint.h>
 #include <stdio.h>
