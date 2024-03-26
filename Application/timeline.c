@@ -16,39 +16,38 @@
 /* Although normally "The Standard Library input/output functions shall not be
    used" (Rule 21.6), in this case we make use of it as temporary solution. */
 // cppcheck-suppress misra-c2012-21.6
-#include <stdio.h>
-#include <stdint.h>
+#include "Application/timeline.h"
 
+#include <stdint.h>
+#include <stdio.h>
+
+#include "Application/faults.h"
+#include "Application/tasks.h"
 #include "cmsis_os2.h"
 
-#include "timeline.h"
-#include "tasks.h"
-#include "faults.h"
-
 // code part of the "timeline_task_thread()" function
-void timeline_task_thread()
-{
+void timeline_task_thread() {
     uint32_t c1 = 150;
     uint32_t t1 = 250U;
-    osTimerId_t periodic_task_1 = osTimerNew(task1, osTimerPeriodic, (void *)&c1, NULL);
-    if (periodic_task_1 == NULL)
-    {
+    osTimerId_t periodic_task_1 =
+        osTimerNew(task1, osTimerPeriodic, (void*)&c1, NULL);
+    if (periodic_task_1 == NULL) {
         app_error_handler(CANNOT_CREATE_TIMER);
     }
 
     uint32_t c2 = 100;
     uint32_t t2 = 500U;
-    osTimerId_t periodic_task_2 = osTimerNew(task2, osTimerPeriodic, (void *)&c2, NULL);
-    if (periodic_task_2 == NULL)
-    {
+    osTimerId_t periodic_task_2 =
+        osTimerNew(task2, osTimerPeriodic, (void*)&c2, NULL);
+    if (periodic_task_2 == NULL) {
         app_error_handler(CANNOT_CREATE_TIMER);
     }
 
     uint32_t c3 = 50;
     uint32_t t3 = 1000U;
-    osTimerId_t periodic_task_3 = osTimerNew(task3, osTimerPeriodic, (void *)&c3, NULL);
-    if (periodic_task_3 == NULL)
-    {
+    osTimerId_t periodic_task_3 =
+        osTimerNew(task3, osTimerPeriodic, (void*)&c3, NULL);
+    if (periodic_task_3 == NULL) {
         app_error_handler(CANNOT_CREATE_TIMER);
     }
 
@@ -60,5 +59,5 @@ void timeline_task_thread()
     osTimerStart(periodic_task_3, t3);
 
     // Suspend tid_thr_app_main
-    // osThreadSuspend(tid_thr_app_main);
+    osThreadSuspend(tid_thr_app_main);
 }
